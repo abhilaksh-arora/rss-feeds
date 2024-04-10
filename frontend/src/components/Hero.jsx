@@ -9,7 +9,7 @@ const Hero = () => {
   }, []);
   const getArticles = async () => {
     try {
-      const res = await axios.get("http://localhost:1000/");
+      const res = await axios.get("https://rss-feeds-dun.vercel.app/");
       setArticles(res.data);
     } catch (error) {
       console.log(error);
