@@ -4,18 +4,7 @@ import Card from "./Card";
 import Header from "./Header";
 
 const Hero = () => {
-  const [articles, setArticles] = useState([]);
-  useEffect(() => {
-    getArticles();
-  }, []);
-  const getArticles = async () => {
-    try {
-      const res = await axios.get("http://localhost:1000");
-      setArticles(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
   return (
     <div className="hero">
       {/* <Header /> */}
