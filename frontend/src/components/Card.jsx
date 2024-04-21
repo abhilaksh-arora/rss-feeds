@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import geminiService from "../geminiServices/GeminiServices";
 
 const Card = ({ article }) => {
+  console.log(article);
+  const [newsInfo, setInfo] = useState(null);
+  const setNews = (content, type) => {
+    if (type == "Summary") {
+      type += "in 60 words";
+    }
+    if (type == "Tweet") {
+      type += "also add emoji and hastags";
+    }
+    geminiService
+      .run(
+        `${content}. Generate a ${type} for this news .Add <br/> tag where line and two <br/> paragraph and also add <br/> tag in the end of every point, list element, etc and remove every * from it `
+      )
+      .then((news) => {
+        if (news) {
+          setInfo(news);
+        }
+        return;
+      })
+      .catch((error) => {
+        return setInfo(`Error:: ${error}`);
+      });
+  };
+  console.log(newsInfo);
   return (
-    <div className="w-[350px] bg-[#2C2C2C] text-white rounded-lg overflow-hidden">
+    <div className="w-[350px] bg-black text-white border-2 border-green-600 rounded-lg overflow-hidden">
       <a href={article.link} target="_blank">
-
+        <img
+          alt="Mountain landscape"
+          className="w-full h-48 object-cover"
+          height="200"
+          src={article.enclosure.url}
+          style={{
+            aspectRatio: "350/200",
+            objectFit: "cover",
+          }}
+          width="350"
+        />
         <div className="p-4">
           <div className="flex flex-wrap gap-2 mb-4">
             {/* {article.categories.map((badge, index) => (
@@ -13,18 +48,38 @@ const Card = ({ article }) => {
               </div>
             ))} */}
           </div>
-          <h2 className="text-xl font-bold mb-2">{article.title}</h2>
-          <p className="text-sm mb-4">
-            {article.content}
+          <h2 className="text-xl font-bold mb-2 text-green-600">
+            {article.title}
+          </h2>
+          <p className="text-sm mb-4 overflow-hidden line-clamp-4">
+            {article.contentSnippet}
           </p>
           <div className="flex items-center text-sm">
-            <PersonStandingIcon className="text-gray-400" />
-            <span className="mx-2">NDTV</span>
-            <CalendarIcon className="text-gray-400" />
+            <PersonStandingIcon className="text-green-600" />
+            <span className="mx-2">{article.creator}</span>
+            <CalendarIcon className="text-green-600" />
             <span className="ml-2">{article.pubDate}</span>
           </div>
         </div>
       </a>
+      <button
+        className=" text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg"
+        onClick={() => setNews(article.contentSnippet, "Blog")}
+      >
+        Genrate Blog
+      </button>
+      <button
+        className=" text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg"
+        onClick={() => setNews(article.content, "Tweet")}
+      >
+        Genrate Tweet
+      </button>
+      <button
+        className=" text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg"
+        onClick={() => setNews(article.content, "Summary")}
+      >
+        Genrate Summary
+      </button>
     </div>
   );
 };
