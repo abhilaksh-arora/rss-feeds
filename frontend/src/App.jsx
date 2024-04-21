@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Hero from "./components/Hero";
 import AnimatedCursor from "react-animated-cursor";
 import News from "./components/News";
+import Footer from "./News/Footer";
 
 const App = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -26,6 +27,7 @@ const App = () => {
       )}
       <Hero />
       <News />
+      <Footer />
     </div>
   );
 };
