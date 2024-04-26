@@ -59,7 +59,7 @@ const Bussiness = ({ buss }) => {
                         <a href={article.item.link}>
                           <div className="relative hover-img max-h-98 overflow-hidden">
                             <img
-                              className="max-w-full w-full mx-auto h-auto"
+                              className="max-w-full lg:w-full w-1/2 h-fit my-auto mx-auto"
                               src={article.item.enclosure.url}
                               v
                               alt="Image description"
@@ -103,7 +103,7 @@ const Bussiness = ({ buss }) => {
                         <a href={article.item.link}>
                           <div className="flex flex-row sm:block hover-img">
                             <img
-                              className="max-w-full w-full mx-auto"
+                              className="max-w-full lg:w-full w-1/2 h-fit my-auto mx-auto"
                               src={article.item.enclosure.url}
                               alt="alt title"
                             />
@@ -122,7 +122,7 @@ const Bussiness = ({ buss }) => {
                           </div>
                         </a>
                         <button
-                          className="absolute top-0 right-2 text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg text-white"
+                          className="absolute top-0 left-2 text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg text-white"
                           onClick={() => openModal(article.item.contentSnippet)}
                         >
                           Generate AI

@@ -61,6 +61,7 @@ const Sports = ({ sports }) => {
                         {chunk.map((article, index) => (
                           <li
                             key={index}
+                            // className="sports-li"
                             style={{
                               marginRight: "24px",
                               width: "calc(33.3333% - 16px)",
