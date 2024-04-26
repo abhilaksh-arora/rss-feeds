@@ -3,32 +3,15 @@ import Hero from "./components/Hero";
 import AnimatedCursor from "react-animated-cursor";
 import News from "./components/News";
 import Footer from "./News/Footer";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
 
 const App = () => {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  
   return (
-    <div>
-      {width >= 756 ? (
-        <AnimatedCursor innerSize={8} outerSize={12} color="80, 200, 120" />
-      ) : (
-        ""
-      )}
-      <Hero />
-      <News />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 };
 

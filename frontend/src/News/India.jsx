@@ -1,8 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import base from "../base";
+import Modal from "../components/Modal";
 
-const India = () => {
+const India = ({ india }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const openModal = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     getArticles();
@@ -16,14 +27,14 @@ const India = () => {
     }
   };
   return (
-    <div>
+    <div ref={india}>
       <div className="text-white">
         <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
           <div className="flex flex-row flex-wrap">
             <div className="flex-shrink max-w-full w-full overflow-hidden">
               <div className="w-full py-3">
-                <h2 className="text-green-600 text-2xl font-bold">
-                  <span className="inline-block h-5 border-l-3 border-red-600 mr-2"></span>
+                <h2 className="text-2xl font-bold">
+                  <span className="inline-block h-5 border-l-3 border-green-600 mr-2"></span>
                   India
                 </h2>
               </div>
@@ -33,7 +44,7 @@ const India = () => {
                     <>
                       <div
                         key={index}
-                        className="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100"
+                        className="relative flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100"
                       >
                         <a href={article.item.link}>
                           <div className="flex flex-row sm:block hover-img">
@@ -49,15 +60,24 @@ const India = () => {
                               <p className="hidden md:block leading-tight mb-1 line-clamp-4">
                                 {article.item.contentSnippet}
                               </p>
-                              <span className="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
+                              <span className="inline-block h-3 border-l-2 border-green-600 mr-2"></span>
                               {article.item.creator}
                             </div>
                           </div>
                         </a>
+                        <button
+                          className="absolute top-0 right-2 text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg text-white"
+                          onClick={() => openModal(article.item.contentSnippet)}
+                        >
+                          Generate AI
+                        </button>
                       </div>
                     </>
                   );
                 })}
+                {isModalOpen && (
+                  <Modal onClose={closeModal} content={modalContent} />
+                )}
               </div>
             </div>
             {/* <div className="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pt-14 lg:pb-8 order-first lg:order-last">

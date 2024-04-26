@@ -1,8 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import base from "../base";
+import Modal from "../components/Modal";
 
-const Bussiness = () => {
+const Bussiness = ({ buss }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const openModal = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const [articles, setArticles] = useState([]);
   const [articles1, setArticles1] = useState([]);
   useEffect(() => {
@@ -27,12 +38,12 @@ const Bussiness = () => {
   };
   return (
     <div>
-      <div className="py-6 text-white">
+      <div className="py-6 text-white" ref={buss}>
         <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
           <div className="flex flex-row flex-wrap">
             <div className="flex-shrink max-w-full w-full lg:w-2/3  overflow-hidden">
               <div className="w-full py-3">
-                <h2 className="text-green-800 text-2xl font-bold">
+                <h2 className="text-2xl font-bold">
                   <span className="inline-block h-5 border-l-3 border-green-600 mr-2"></span>
                   Bussiness
                 </h2>
@@ -41,7 +52,10 @@ const Bussiness = () => {
                 {articles.slice(0, 1).map((article, index) => {
                   return (
                     <>
-                      <div key={index} className="flex-shrink max-w-full w-full px-3 pb-5">
+                      <div
+                        key={index}
+                        className="relative flex-shrink max-w-full w-full px-3 pb-5"
+                      >
                         <a href={article.item.link}>
                           <div className="relative hover-img max-h-98 overflow-hidden">
                             <img
@@ -62,22 +76,30 @@ const Bussiness = () => {
 
                               <div className="pt-2">
                                 <div className="text-gray-100">
-                                  <div className="inline-block h-3 border-l-2 border-red-600 mr-2"></div>
+                                  <div className="inline-block h-3 border-l-2 border-green-600 mr-2"></div>
                                   {article.item.creator}
                                 </div>
                               </div>
                             </div>
                           </div>
                         </a>
+                        <button
+                          className="absolute top-0 right-2 text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg text-white"
+                          onClick={() => openModal(article.item.contentSnippet)}
+                        >
+                          Generate AI
+                        </button>
                       </div>
                     </>
                   );
                 })}
-
+                {isModalOpen && (
+                  <Modal onClose={closeModal} content={modalContent} />
+                )}
                 {articles.slice(1, 7).map((article, index) => {
                   return (
                     <>
-                      <div className="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
+                      <div className="relative flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100">
                         <a href={article.item.link}>
                           <div className="flex flex-row sm:block hover-img">
                             <img
@@ -94,15 +116,24 @@ const Bussiness = () => {
                                 {article.item.contentSnippet}
                               </p>
 
-                              <span className="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
+                              <span className="inline-block h-3 border-l-2 border-green-600 mr-2"></span>
                               {article.item.creator}
                             </div>
                           </div>
                         </a>
+                        <button
+                          className="absolute top-0 right-2 text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg text-white"
+                          onClick={() => openModal(article.item.contentSnippet)}
+                        >
+                          Generate AI
+                        </button>
                       </div>
                     </>
                   );
                 })}
+                {isModalOpen && (
+                  <Modal onClose={closeModal} content={modalContent} />
+                )}
               </div>
             </div>
             <div

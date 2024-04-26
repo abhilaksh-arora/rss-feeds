@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
-import Header from "./Header";
+import Navbar from "./Navbar";
 
-const Hero = () => {
-  
+const Hero = ({ main, india, world, tech, sports, enter, buss }) => {
   return (
     <div className="hero">
-      {/* <Header /> */}
-      <section className="h-[80%] flex justify-center items-center mt-20">
+      <Navbar
+        main={main}
+        india={india}
+        world={world}
+        sports={sports}
+        enter={enter}
+        buss={buss}
+        tech={tech}
+      />
+      <section className="h-[60%] flex justify-center items-center mt-12">
         <div>
           <div>
-            <h1 className="text-5xl font-bold tracking-tight text-white sm:text-8xl text-center mt-[-190px]">
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl text-center">
               Get
-              <span className="text-green-600"> Updated</span>
-              <br />
+              <span className="text-green-600"> Updated </span>
               News Every
               <span className="text-green-600"> Day </span>
             </h1>
@@ -25,15 +31,7 @@ const Hero = () => {
           <div class="mouse"></div>
         </div>
       </section>
-      {/* <div className="flex flex-row flex-wrap justify-center">
-        {articles.map((article, index) => {
-          return (
-            <div className="p-4" key={index}>
-              <Card article={article.item} />
-            </div>
-          );
-        })}
-      </div> */}
+
     </div>
   );
 };
