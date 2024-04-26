@@ -174,7 +174,7 @@ const Entertainment = ({ enter }) => {
                           </div>
                         </a>
                         <button
-                          className="absolute top-0 right-2 text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg text-white"
+                          className="absolute top-0 left-2 text-sm py-2 px-2 m-2 font-sans bg-green-500 rounded-lg text-white"
                           onClick={() => openModal(article.item.contentSnippet)}
                         >
                           Generate AI
