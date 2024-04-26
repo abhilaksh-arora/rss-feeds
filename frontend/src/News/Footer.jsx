@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="row">
               <div className="col-12 col-md text-center">
                 <p className="d-block my-3">
-                  Copyright © News Buzz | All rights reserved.
+                  Copyright © Abhilaksh Arora | All rights reserved.
                 </p>
               </div>
             </div>
