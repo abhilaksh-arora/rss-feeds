@@ -108,7 +108,7 @@ const Entertainment = ({ enter }) => {
                         <a href={article.item.link}>
                           <div className="relative hover-img max-h-98 overflow-hidden">
                             <img
-                              className="max-w-full lg:w-full w-1/2 h-fit my-auto mx-auto"
+                              className="max-w-full lg:w-full w-1/2 h-1/2 my-auto mx-auto"
                               src={article.item.enclosure.url}
                               v
                               alt="Image description"
@@ -155,7 +155,7 @@ const Entertainment = ({ enter }) => {
                         <a href={article.item.link}>
                           <div className="flex flex-row sm:block hover-img">
                             <img
-                              className="max-w-full lg:w-full w-1/2 h-fit my-auto mx-auto"
+                              className="max-w-full lg:w-full w-1/2 h-1/2 my-auto mx-auto"
                               src={article.item.enclosure.url}
                               alt="alt title"
                             />
